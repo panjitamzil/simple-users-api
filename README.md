@@ -4,7 +4,7 @@ Simple API build with Go that had CRUD and Login feature
 ### Instructions :
 1. Rename file ```env``` into ```.env```
 
-2. Fill your host, name, username, and password database on file ```.env```
+2. Fill your host, db name, username, and password database on file ```.env```
 
 3. How to run this apps. Choose 1 between "Via docker" or "Via terminal" :
 - Via Docker :
