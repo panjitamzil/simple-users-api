@@ -17,6 +17,12 @@ func (rest *Rest) handleRegister(w http.ResponseWriter, r *http.Request, _ httpr
 	data := &entity.AccountInfo{}
 	ParseBody(r, data)
 
+	// validation data (user_id, email, address, and password cannot be empty)
+	if data.UserID == "" || data.Email == "" || data.Address == "" || data.Password == "" {
+		errors.WithError(w, http.StatusInternalServerError, errors.ErrInvalidRequest)
+		return
+	}
+
 	// check is it user_id exist or not
 	status := rest.service.CheckUserID(data.UserID)
 	if status != true {
@@ -51,6 +57,12 @@ func (rest *Rest) handleUpdateProfile(w http.ResponseWriter, r *http.Request, pa
 
 	data := &entity.AccountInfo{}
 	ParseBody(r, data)
+
+	// validation data (user_id, email, address, and password cannot be empty)
+	if data.UserID == "" || data.Email == "" || data.Address == "" || data.Password == "" {
+		errors.WithError(w, http.StatusInternalServerError, errors.ErrInvalidRequest)
+		return
+	}
 
 	pass, err := bcrypt.GenerateFromPassword([]byte(data.Password), 14)
 	if err != nil {
